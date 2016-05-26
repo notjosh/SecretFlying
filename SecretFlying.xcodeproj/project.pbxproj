@@ -28,6 +28,8 @@
 		4282C88A1CF6198F009DE6AC /* ExtremeSuperAmazingDeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4282C8891CF6198F009DE6AC /* ExtremeSuperAmazingDeal.swift */; };
 		4282C88C1CF62186009DE6AC /* DealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4282C88B1CF62186009DE6AC /* DealCellView.swift */; };
 		42C9CC4E1CF6EF97001657EC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 42C9CC4D1CF6EF97001657EC /* Credits.rtf */; };
+		42C9CC7D1CF6F3C6001657EC /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C9CC7C1CF6F3C6001657EC /* ServiceManagement.framework */; };
+		42C9CC8A1CF6FC68001657EC /* SecretFlyingLoginHelper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 42C9CC831CF6F718001657EC /* SecretFlyingLoginHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		95AD03DEE99AD74089CA4BAB /* Pods_SecretFlyingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E25D2F06D05D898EBBE4D3F /* Pods_SecretFlyingTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +41,35 @@
 			remoteGlobalIDString = 420E497E1CF5D2210011D6A5;
 			remoteInfo = SecretFlying;
 		};
+		42C9CC821CF6F718001657EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42C9CC7E1CF6F718001657EC /* SecretFlyingLoginHelper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 42C9CC691CF6F346001657EC;
+			remoteInfo = SecretFlyingLoginHelper;
+		};
+		42C9CC841CF6F729001657EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42C9CC7E1CF6F718001657EC /* SecretFlyingLoginHelper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 42C9CC681CF6F346001657EC;
+			remoteInfo = SecretFlyingLoginHelper;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42C9CC791CF6F37E001657EC /* Copy Helper App */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				42C9CC8A1CF6FC68001657EC /* SecretFlyingLoginHelper.app in Copy Helper App */,
+			);
+			name = "Copy Helper App";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		420E497F1CF5D2210011D6A5 /* SecretFlying.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecretFlying.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +96,9 @@
 		4282C8891CF6198F009DE6AC /* ExtremeSuperAmazingDeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtremeSuperAmazingDeal.swift; sourceTree = "<group>"; };
 		4282C88B1CF62186009DE6AC /* DealCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealCellView.swift; sourceTree = "<group>"; };
 		42C9CC4D1CF6EF97001657EC /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		42C9CC7C1CF6F3C6001657EC /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		42C9CC7E1CF6F718001657EC /* SecretFlyingLoginHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SecretFlyingLoginHelper.xcodeproj; path = SecretFlyingLoginHelper/SecretFlyingLoginHelper.xcodeproj; sourceTree = "<group>"; };
+		42C9CC881CF6FB6B001657EC /* SecretFlying.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SecretFlying.entitlements; sourceTree = "<group>"; };
 		49BF16FEFA11B0E4159DD882 /* Pods-SecretFlyingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecretFlyingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SecretFlyingTests/Pods-SecretFlyingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		80396FDAC511436BFDF9D814 /* Pods_SecretFlying.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecretFlying.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E25D2F06D05D898EBBE4D3F /* Pods_SecretFlyingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecretFlyingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C9CC7D1CF6F3C6001657EC /* ServiceManagement.framework in Frameworks */,
 				08B81DBC539124B6F604B273 /* Pods_SecretFlying.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +131,7 @@
 		420E49761CF5D2210011D6A5 = {
 			isa = PBXGroup;
 			children = (
+				42C9CC7E1CF6F718001657EC /* SecretFlyingLoginHelper.xcodeproj */,
 				420E49811CF5D2210011D6A5 /* SecretFlying */,
 				420E49931CF5D2210011D6A5 /* SecretFlyingTests */,
 				420E49801CF5D2210011D6A5 /* Products */,
@@ -117,6 +152,7 @@
 		420E49811CF5D2210011D6A5 /* SecretFlying */ = {
 			isa = PBXGroup;
 			children = (
+				42C9CC881CF6FB6B001657EC /* SecretFlying.entitlements */,
 				4229FF061CF6D47C00D4C38E /* Operation */,
 				4229FF031CF6D1D700D4C38E /* Provider */,
 				4229FF001CF6CC7600D4C38E /* AppKit */,
@@ -222,9 +258,18 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		42C9CC7F1CF6F718001657EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42C9CC831CF6F718001657EC /* SecretFlyingLoginHelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8C220422C89BF14450FD3FFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42C9CC7C1CF6F3C6001657EC /* ServiceManagement.framework */,
 				80396FDAC511436BFDF9D814 /* Pods_SecretFlying.framework */,
 				8E25D2F06D05D898EBBE4D3F /* Pods_SecretFlyingTests.framework */,
 			);
@@ -255,10 +300,12 @@
 				420E497D1CF5D2210011D6A5 /* Resources */,
 				9CE935AADBF947B801FB0DBE /* 📦 Embed Pods Frameworks */,
 				E76B24C4665136792B0C7CE8 /* 📦 Copy Pods Resources */,
+				42C9CC791CF6F37E001657EC /* Copy Helper App */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				42C9CC851CF6F729001657EC /* PBXTargetDependency */,
 			);
 			name = SecretFlying;
 			productName = SecretFlying;
@@ -298,6 +345,12 @@
 				TargetAttributes = {
 					420E497E1CF5D2210011D6A5 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = J8GZ9347Y3;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					420E498F1CF5D2210011D6A5 = {
 						CreatedOnToolsVersion = 7.3;
@@ -316,6 +369,12 @@
 			mainGroup = 420E49761CF5D2210011D6A5;
 			productRefGroup = 420E49801CF5D2210011D6A5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 42C9CC7F1CF6F718001657EC /* Products */;
+					ProjectRef = 42C9CC7E1CF6F718001657EC /* SecretFlyingLoginHelper.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				420E497E1CF5D2210011D6A5 /* SecretFlying */,
@@ -323,6 +382,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		42C9CC831CF6F718001657EC /* SecretFlyingLoginHelper.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SecretFlyingLoginHelper.app;
+			remoteRef = 42C9CC821CF6F718001657EC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		420E497D1CF5D2210011D6A5 /* Resources */ = {
@@ -477,6 +546,11 @@
 			target = 420E497E1CF5D2210011D6A5 /* SecretFlying */;
 			targetProxy = 420E49911CF5D2210011D6A5 /* PBXContainerItemProxy */;
 		};
+		42C9CC851CF6F729001657EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SecretFlyingLoginHelper;
+			targetProxy = 42C9CC841CF6F729001657EC /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -578,6 +652,8 @@
 			baseConfigurationReference = E15928BBEC217B9762BDB80F /* Pods-SecretFlying.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SecretFlying/SecretFlying.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SecretFlying/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -591,6 +667,8 @@
 			baseConfigurationReference = A461921E61EF7BFC6680A55F /* Pods-SecretFlying.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SecretFlying/SecretFlying.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SecretFlying/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

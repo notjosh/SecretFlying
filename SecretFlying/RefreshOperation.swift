@@ -58,8 +58,8 @@ class RefreshOperation: NSOperation {
         _executing = true
         didChangeValueForKey("isExecuting")
 
-        let URLString = "http://localhost/~joshua/play/secret-flying/\(region).html"
-//        let URLString = "https://www.secretflying.com/\(region)/"
+//        let URLString = "http://localhost/~joshua/play/secret-flying/\(region).html"
+        let URLString = "https://www.secretflying.com/\(region)/"
         let userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 
         let URLRequest = NSMutableURLRequest(URL: NSURL.init(string: URLString)!)

@@ -755,7 +755,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="215" rowSizeStyle="automatic" viewBased="YES" id="f6A-Fw-mvB">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="420"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -870,6 +870,11 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="zT4-7p-amV" customClass="StartAtLoginController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="com.notjosh.SecretFlyingLoginHelper"/>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
                 <menu id="7Pg-gu-oBI">
                     <items>
                         <menuItem title="Check for Updates..." id="ov0-dh-sTa">
@@ -884,6 +889,9 @@
                         </menuItem>
                         <menuItem title="Start at Login" id="cA9-n3-0aK">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <binding destination="zT4-7p-amV" name="value" keyPath="startAtLogin" id="qJb-CS-Q22"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Quit" id="qPu-WJ-COE">
                             <modifierMask key="keyEquivalentModifierMask"/>
