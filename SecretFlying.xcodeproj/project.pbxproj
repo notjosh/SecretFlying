@@ -15,7 +15,6 @@
 		420E49951CF5D2210011D6A5 /* SecretFlyingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E49941CF5D2210011D6A5 /* SecretFlyingTests.swift */; };
 		420E49A21CF5E4F80011D6A5 /* jsonify.js in Resources */ = {isa = PBXBuildFile; fileRef = 420E49A11CF5E4F80011D6A5 /* jsonify.js */; };
 		420E49A71CF5E5AD0011D6A5 /* RequireAwareJSContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E49A61CF5E5AD0011D6A5 /* RequireAwareJSContext.swift */; };
-		420E49AD1CF5E61A0011D6A5 /* euro-deals.html in Resources */ = {isa = PBXBuildFile; fileRef = 420E49AB1CF5E61A0011D6A5 /* euro-deals.html */; };
 		420E49AE1CF5E61A0011D6A5 /* oceania-deals.html in Resources */ = {isa = PBXBuildFile; fileRef = 420E49AC1CF5E61A0011D6A5 /* oceania-deals.html */; };
 		420E49B01CF5E6BA0011D6A5 /* JavaScriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E49AF1CF5E6BA0011D6A5 /* JavaScriptRunner.swift */; };
 		4229FEFB1CF6A80900D4C38E /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4229FEFA1CF6A80900D4C38E /* StatusMenuController.swift */; };
@@ -30,6 +29,7 @@
 		42C9CC4E1CF6EF97001657EC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 42C9CC4D1CF6EF97001657EC /* Credits.rtf */; };
 		42C9CC7D1CF6F3C6001657EC /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C9CC7C1CF6F3C6001657EC /* ServiceManagement.framework */; };
 		42C9CC8A1CF6FC68001657EC /* SecretFlyingLoginHelper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 42C9CC831CF6F718001657EC /* SecretFlyingLoginHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		42EB1D8F2215DC360046E708 /* euro-deals.html in Resources */ = {isa = PBXBuildFile; fileRef = 420E49AB1CF5E61A0011D6A5 /* euro-deals.html */; };
 		95AD03DEE99AD74089CA4BAB /* Pods_SecretFlyingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E25D2F06D05D898EBBE4D3F /* Pods_SecretFlyingTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -398,12 +398,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42EB1D8F2215DC360046E708 /* euro-deals.html in Resources */,
 				420E49871CF5D2210011D6A5 /* Assets.xcassets in Resources */,
 				4282C8871CF61881009DE6AC /* cheerio.js in Resources */,
 				42C9CC4E1CF6EF97001657EC /* Credits.rtf in Resources */,
 				420E498A1CF5D2210011D6A5 /* Main.storyboard in Resources */,
 				420E49AE1CF5E61A0011D6A5 /* oceania-deals.html in Resources */,
-				420E49AD1CF5E61A0011D6A5 /* euro-deals.html in Resources */,
 				420E49A21CF5E4F80011D6A5 /* jsonify.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

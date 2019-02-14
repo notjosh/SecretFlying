@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F18b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -663,10 +664,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="ToolbarBackground" id="cU6-To-vx8"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="766-kY-Aw3">
-                                        <rect key="frame" x="113" y="3" width="95" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="91" id="mS1-dn-85c"/>
-                                        </constraints>
+                                        <rect key="frame" x="126" y="3" width="68" height="26"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="🛫💁🛬" id="IXc-gH-FDg">
                                             <font key="font" size="15" name="AvenirNext-Medium"/>
                                             <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -684,7 +682,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="handleSettingsButton:" target="XfG-lQ-9wD" id="2O0-rt-ICH"/>
+                                            <action selector="handleSettingsButtonWithSender:" target="XfG-lQ-9wD" id="beD-Vt-D5D"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q2B-jv-izH">
@@ -698,7 +696,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="handleRefreshButton:" target="XfG-lQ-9wD" id="152-8y-aU4"/>
+                                            <action selector="handleRefreshButtonWithSender:" target="XfG-lQ-9wD" id="kk9-lB-aXJ"/>
                                         </connections>
                                     </button>
                                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cbh-aP-hha" customClass="ITProgressIndicator">
@@ -755,7 +753,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="215" rowSizeStyle="automatic" viewBased="YES" id="f6A-Fw-mvB">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="420"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -781,7 +779,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="215"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Vre-N4-Tw3"/>
                                                                 </imageView>
-                                                                <visualEffectView appearanceType="vibrantDark" blendingMode="withinWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-cv-E7H">
+                                                                <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-cv-E7H">
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="600" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-f6-iws">
@@ -831,7 +829,7 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <action selector="handleClick:" target="XfG-lQ-9wD" id="1Js-vN-Ofb"/>
+                                                <action selector="handleClickWithSender:" target="XfG-lQ-9wD" id="gX9-Pg-Wua"/>
                                                 <outlet property="dataSource" destination="XfG-lQ-9wD" id="RA8-v2-RdX"/>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="hCn-Su-NyS"/>
                                             </connections>
@@ -842,11 +840,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="o8M-Za-9ue"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="n6n-bd-ePk">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="n6n-bd-ePk">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="q3Q-Uv-dfU">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="q3Q-Uv-dfU">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>

@@ -1,16 +1,21 @@
-var jsonify = require('./jsonify'),
+const jsonify = require('./jsonify'),
 	fs = require('fs');
 
-var usage = function() {
+const usage = () => {
 	console.log('usage: runner.js /path/to/source.html');
 	process.exit(1);
 };
 
+let json = '';
+
 try {
-	var path = process.argv.pop();
-	var html = fs.readFileSync(path, 'utf8');
-	var json = jsonify(html);
+	const path = process.argv.pop();
+	const html = fs.readFileSync(path, 'utf8');
+
+	json = jsonify(html);
 } catch (e) {
+	console.error(e);
+
 	usage();
 }
 

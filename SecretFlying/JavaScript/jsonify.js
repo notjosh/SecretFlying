@@ -1,23 +1,25 @@
-var cheerio = require('./cheerio');
+const cheerio = require('./cheerio');
 
-var jsonify = function(html) {
-	var $ = cheerio.load(html);
+const jsonify = (html) => {
+	const $ = cheerio.load(html);
 
-	return $('.blogpost_preview_fw.post').map(function() {
-		var id;
+	return $('article')
+		.not('.adArcl')
+		.map((i, node) => {
+		let id;
 		try {
-			id = $(this).attr('class').match(/post-(\d+)/)[1];
+			id = $(node).attr('class').match(/post-(\d+)/)[1];
 		} catch (e) {
 			id = null;
 		}
 
 		return {
-			'id': id,
-			'date': $(this).find('.box_date').text().trim().replace(/\s+/g, ' '),
-			'title': $(this).find('.blogpost_title').text().trim(),
-			'summary': $(this).find('article.contentarea').text().trim(),
-			'thumbnail_url': $(this).find('img.featured_image_standalone').attr('src'),
-			'url': $(this).find('a.reamdore').attr('href'),
+			id: id,
+			date: $(node).find('time.entry-date').attr('datetime'),
+			title: $(node).find('.entry-title').text().trim(),
+			summary: $(node).find('p').text().trim(),
+			thumbnail_url: $(node).find('img.wp-post-image').attr('src'),
+			url: $(node).find('a.snews-read-more').attr('href'),
 		};
 	}).get();
 };

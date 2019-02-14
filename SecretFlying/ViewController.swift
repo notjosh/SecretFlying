@@ -72,7 +72,7 @@ class ViewController: NSViewController {
 }
 
 extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return provider.deals.count
     }
 
