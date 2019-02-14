@@ -1,4 +1,5 @@
 platform :osx, '10.11'
+inhibit_all_warnings!
 
 target 'SecretFlying' do
   use_frameworks!
