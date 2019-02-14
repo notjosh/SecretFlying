@@ -779,7 +779,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="215"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Vre-N4-Tw3"/>
                                                                 </imageView>
-                                                                <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-cv-E7H">
+                                                                <visualEffectView appearanceType="vibrantDark" blendingMode="withinWindow" material="HUDWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-cv-E7H">
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="600" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-f6-iws">
