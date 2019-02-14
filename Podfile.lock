@@ -1,32 +1,38 @@
 PODS:
-  - Alamofire (3.4.0)
-  - AlamofireImage (2.4.0):
-    - Alamofire (~> 3.3)
+  - Alamofire (4.8.0)
+  - AlamofireImage (3.5.0):
+    - Alamofire (~> 4.8)
   - ITProgressIndicator (0.1)
   - StartAtLoginController (0.0.1)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
-  - AlamofireImage (~> 2.4)
-  - ITProgressIndicator (from `https://github.com/iluuu1994/ITProgressIndicator.git`, commit `6e1998a68e`)
+  - Alamofire (~> 4.8)
+  - AlamofireImage (~> 3.5)
+  - ITProgressIndicator (from `https://github.com/iluuu1994/ITProgressIndicator.git`, commit `c2fe94f`)
   - StartAtLoginController (~> 0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireImage
+    - StartAtLoginController
 
 EXTERNAL SOURCES:
   ITProgressIndicator:
-    :commit: 6e1998a68e
+    :commit: c2fe94f
     :git: https://github.com/iluuu1994/ITProgressIndicator.git
 
 CHECKOUT OPTIONS:
   ITProgressIndicator:
-    :commit: 6e1998a68e
+    :commit: c2fe94f
     :git: https://github.com/iluuu1994/ITProgressIndicator.git
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
   ITProgressIndicator: b1d04e50606f0511639abed6ecd2c47f08fd4387
   StartAtLoginController: 9ff14295bab38f7cba164a838349f6c0a2d83020
 
-PODFILE CHECKSUM: 766887ef0dc1671d6f584ff6b9ca6c6c21f85d06
+PODFILE CHECKSUM: 10fffe62a7ead3957714331153d8630b31ea48a9
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.6.0

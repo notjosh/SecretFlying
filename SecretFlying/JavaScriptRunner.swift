@@ -19,11 +19,11 @@ class JavaScriptRunner {
         context.evaluateScript("var jsonify = require('jsonify')")
 
         let jsonifyFunction = context.evaluateScript("jsonify")
-        let jsonifyFunctionResponse = jsonifyFunction.callWithArguments([HTML])
+        let jsonifyFunctionResponse = jsonifyFunction?.call(withArguments: [HTML])
 
-        let jsonDeals = jsonifyFunctionResponse.toArray() as! Array<Dictionary<String, AnyObject>>
+        let jsonDeals = jsonifyFunctionResponse?.toArray() as? [[String: AnyObject]]
 
-        return jsonDeals.flatMap({ (jsonDeal: [String : AnyObject]) -> ExtremeSuperAmazingDeal? in
+        return jsonDeals?.compactMap { (jsonDeal: [String : AnyObject]) -> ExtremeSuperAmazingDeal? in
             if jsonDeal["id"] == nil {
                 return nil
             }
@@ -48,14 +48,14 @@ class JavaScriptRunner {
                 return nil
             }
 
-            return ExtremeSuperAmazingDeal.init(
+            return ExtremeSuperAmazingDeal(
                 id: jsonDeal["id"] as! String,
                 date: jsonDeal["date"] as! String,
                 title: jsonDeal["title"] as! String,
                 summary: jsonDeal["summary"] as! String,
-                thumbnailURL: NSURL(string: (jsonDeal["thumbnail_url"] as! String).stringByReplacingOccurrencesOfString("http://", withString: "https://"))!,
-                URL: NSURL(string: jsonDeal["url"] as! String)!
+                thumbnailURL: URL(string: (jsonDeal["thumbnail_url"] as! String).replacingOccurrences(of: "http://", with: "https://"))!,
+                URL: URL(string: jsonDeal["url"] as! String)!
             )
-        })
+        } ?? []
     }
 }

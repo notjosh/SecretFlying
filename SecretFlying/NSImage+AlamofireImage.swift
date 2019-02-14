@@ -83,7 +83,7 @@ extension NSImageView {
             if let downloader = objc_getAssociatedObject(self, &AssociatedKeys.SharedImageDownloaderKey) as? ImageDownloader {
                 return downloader
             } else {
-                return ImageDownloader.defaultInstance
+                return ImageDownloader.default
             }
         }
         set {
@@ -125,15 +125,15 @@ extension NSImageView {
      image cache, the response will be `nil`. Defaults to `nil`.
      */
     public func af_setImageWithURL(
-        URL: NSURL,
+        URL: URL,
         placeholderImage: NSImage? = nil,
         filter: ImageFilter? = nil,
         progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: dispatch_queue_t = dispatch_get_main_queue(),
-        completion: (Response<NSImage, NSError> -> Void)? = nil)
+        progressQueue: DispatchQueue = .main,
+        completion: ((DataResponse<NSImage>) -> Void)? = nil)
     {
         af_setImageWithURLRequest(
-            URLRequestWithURL(URL),
+            URLRequest: URLRequestWithURL(URL: URL),
             placeholderImage: placeholderImage,
             filter: filter,
             progress: progress,
@@ -169,10 +169,10 @@ extension NSImageView {
         placeholderImage: NSImage? = nil,
         filter: ImageFilter? = nil,
         progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: dispatch_queue_t = dispatch_get_main_queue(),
-        completion: (Response<NSImage, NSError> -> Void)? = nil)
+        progressQueue: DispatchQueue = .main,
+        completion: ((DataResponse<NSImage>) -> Void)? = nil)
     {
-        guard !isURLRequestURLEqualToActiveRequestURL(URLRequest) else { return }
+        guard !isURLRequestURLEqualToActiveRequestURL(URLRequest: URLRequest) else { return }
 
         af_cancelImageRequest()
 
@@ -180,12 +180,13 @@ extension NSImageView {
         let imageCache = imageDownloader.imageCache
 
         // Use the image from the image cache if it exists
-        if let image = imageCache?.imageForRequest(URLRequest.URLRequest, withAdditionalIdentifier: filter?.identifier) {
-            let response = Response<NSImage, NSError>(
-                request: URLRequest.URLRequest,
+        if let req = URLRequest.urlRequest,
+            let image = imageCache?.image(for: req, withIdentifier: filter?.identifier) {
+            let response = DataResponse<NSImage>(
+                request: URLRequest.urlRequest,
                 response: nil,
                 data: nil,
-                result: .Success(image)
+                result: .success(image)
             )
 
             completion?(response)
@@ -199,10 +200,10 @@ extension NSImageView {
         if let placeholderImage = placeholderImage { self.image = placeholderImage }
 
         // Generate a unique download id to check whether the active request has changed while downloading
-        let downloadID = NSUUID().UUIDString
+        let downloadID = NSUUID().uuidString
 
-        let requestReceipt = imageDownloader.downloadImage(
-            URLRequest: URLRequest,
+        let requestReceipt = imageDownloader.download(
+            URLRequest,
             receiptID: downloadID,
             filter: filter,
             progress: progress,
@@ -213,7 +214,7 @@ extension NSImageView {
                 completion?(response)
 
                 guard
-                    strongSelf.isURLRequestURLEqualToActiveRequestURL(response.request) &&
+                    strongSelf.isURLRequestURLEqualToActiveRequestURL(URLRequest: response.request) &&
                         strongSelf.af_activeRequestReceipt?.receiptID == downloadID
                     else {
                         return
@@ -239,7 +240,7 @@ extension NSImageView {
         guard let activeRequestReceipt = af_activeRequestReceipt else { return }
 
         let imageDownloader = af_imageDownloader ?? NSImageView.af_sharedImageDownloader
-        imageDownloader.cancelRequestForRequestReceipt(activeRequestReceipt)
+        imageDownloader.cancelRequest(with: activeRequestReceipt)
 
         af_activeRequestReceipt = nil
     }
@@ -247,21 +248,20 @@ extension NSImageView {
 
     // MARK: - Private - URL Request Helper Methods
 
-    private func URLRequestWithURL(URL: NSURL) -> NSURLRequest {
-        let mutableURLRequest = NSMutableURLRequest(URL: URL)
+    private func URLRequestWithURL(URL: URL) -> URLRequest {
+        var urlRequest = URLRequest(url: URL)
 
         for mimeType in NSImageView.acceptableImageContentTypes {
-            mutableURLRequest.addValue(mimeType, forHTTPHeaderField: "Accept")
+            urlRequest.addValue(mimeType, forHTTPHeaderField: "Accept")
         }
 
-        return mutableURLRequest
+        return urlRequest
     }
 
     private func isURLRequestURLEqualToActiveRequestURL(URLRequest: URLRequestConvertible?) -> Bool {
-        if let
-            currentRequest = af_activeRequestReceipt?.request.task.originalRequest
-            where currentRequest.URLString == URLRequest?.URLRequest.URLString
-        {
+        if
+            let currentRequest = af_activeRequestReceipt?.request.task?.originalRequest,
+            currentRequest.url?.absoluteString == URLRequest?.urlRequest?.url?.absoluteString {
             return true
         }
         

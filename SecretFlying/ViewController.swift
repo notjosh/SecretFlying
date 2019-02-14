@@ -26,14 +26,17 @@ class ViewController: NSViewController {
     }
 
     @IBAction func handleClick(sender: AnyObject) {
-        guard let row: Int? = tableView.selectedRow where row != -1 else {
+        let row = tableView.selectedRow
+
+        guard
+            row != -1 else {
             return
         }
 
-        let deal = provider.deals[row!]
+        let deal = provider.deals[row]
 
-        NSWorkspace.sharedWorkspace().openURL(deal.URL)
-        tableView.deselectRow(row!)
+        NSWorkspace.shared.open(deal.URL as URL)
+        tableView.deselectRow(row)
     }
 
     @IBAction func handleRefreshButton(sender: AnyObject?) {
@@ -45,25 +48,25 @@ class ViewController: NSViewController {
             return
         }
 
-        settingsMenu.popUpMenuPositioningItem(
-            nil,
-            atLocation: NSPoint(
+        settingsMenu.popUp(
+            positioning: nil,
+            at: NSPoint(
                 x: NSMaxX(view.bounds),
                 y: NSMidY(view.bounds)
             ),
-            inView: view
+            in: view
         )
     }
 
     func refresh() {
-        refreshButton.enabled = false
-        progressIndicator.hidden = false
+        refreshButton.isEnabled = false
+        progressIndicator.isHidden = false
         provider.refresh {
-            dispatch_async(dispatch_get_main_queue(), { [weak self] in
-                self?.refreshButton.enabled = true
-                self?.progressIndicator.hidden = true
+            DispatchQueue.main.async { [weak self] in
+                self?.refreshButton.isEnabled = true
+                self?.progressIndicator.isHidden = true
                 self?.tableView.reloadData()
-                })
+            }
         }
     }
 }
@@ -73,22 +76,22 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
         return provider.deals.count
     }
 
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 215
     }
 
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeViewWithIdentifier("DealCellView", owner: self) as! DealCellView
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DealCellView"), owner: self) as! DealCellView
         let deal = provider.deals[row]
 
         cell.itemName.stringValue = deal.title
         cell.itemDescription.stringValue = deal.summary
 
-        cell.itemImage.af_setImageWithURL(deal.thumbnailURL)
+        cell.itemImage.af_setImageWithURL(URL: deal.thumbnailURL)
         cell.itemImage.wantsLayer = true
         cell.itemImage.layerUsesCoreImageFilters = true
 
-        if (deal.expired) {
+        if (deal.isExpired) {
             let filterColorControls = CIFilter.init(name: "CIColorControls")
             filterColorControls?.setDefaults()
             filterColorControls?.setValue(-0.5, forKey: kCIInputBrightnessKey)

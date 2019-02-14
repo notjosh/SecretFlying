@@ -10,14 +10,14 @@ import Cocoa
 
 class DealsProvider {
     var deals: [ExtremeSuperAmazingDeal] = []
-    var queue = NSOperationQueue.init()
+    var queue = OperationQueue.init()
     var fetchRunning: Bool {
         get {
             return queue.operationCount != 0
         }
     }
 
-    func refresh(completion: () -> Void) {
+    func refresh(completion: @escaping () -> Void) {
         guard !fetchRunning else {
             return
         }

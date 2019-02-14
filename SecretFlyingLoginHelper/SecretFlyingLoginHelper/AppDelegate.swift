@@ -12,26 +12,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         var alreadyRunning = false
         var active = false
-        let running = NSWorkspace.sharedWorkspace().runningApplications
+        let running = NSWorkspace.shared.runningApplications
 
         for app in running {
             if (app.bundleIdentifier == "com.notjosh.SecretFlying") {
                 alreadyRunning = true
-                active = app.active
+                active = app.isActive
                 break
             }
         }
 
         if (!alreadyRunning || !active) {
-            let path = NSBundle.mainBundle().bundlePath
+            let path = Bundle.main.bundlePath
             var p = NSURL(string: path)?.pathComponents
 
             p?.removeLast(3)
             p?.append("MacOS")
             p?.append("SecretFlying")
 
-            let newPath = NSURL.fileURLWithPathComponents(p!)!.path
-            NSWorkspace.sharedWorkspace().launchApplication(newPath!)
+            let newPath = NSURL.fileURL(withPathComponents: p!)!.path
+            NSWorkspace.shared.launchApplication(newPath)
         }
 
         NSApp.terminate(nil)

@@ -20,34 +20,39 @@ class RequireAwareJSContext : JSContext {
     }
 
     func common() {
-        self.exceptionHandler = { context, exception in
-            print("JS Error: \(exception)")
+        self.exceptionHandler = { (context, exception) -> Void in
+            print("JS Error: \(String(describing: exception))")
         }
 
         // set up module requires.
         // very hacky, but fine for simple things :)
-        let require: @convention(block) String -> AnyObject = { [weak self] input in
-            let fileURL = self!.URLForJSResource(input);
-            let requireContext = RequireAwareJSContext.init(virtualMachine: self!.virtualMachine)
-
-            if (fileURL == nil) {
-                return requireContext.evaluateScript("throw new Exception('can\'t find \(input)');")
+        let require: @convention(block) (String) -> AnyObject = { [weak self] input in
+            guard
+                let requireContext = RequireAwareJSContext.init(virtualMachine: self!.virtualMachine)
+                else {
+                    fatalError("requireContext :(")
             }
 
-            let resources = NSBundle.mainBundle().resourceURL
-            let filePath = fileURL?.URLByDeletingLastPathComponent
-            let fileContext = filePath?.path?.stringByReplacingOccurrencesOfString((resources?.path)!, withString: "")
+            guard
+                let fileURL = self!.URLForJSResource(resource: input)
+                else {
+                    return requireContext.evaluateScript("throw new Exception('can\'t find \(input)');")
+            }
+
+            let resources = Bundle.main.resourceURL
+            let filePath = fileURL.deletingLastPathComponent()
+            let fileContext = filePath.path.replacingOccurrences(of: (resources?.path)!, with: "")
 
             // for future require()s
             if (fileContext != "") {
-                requireContext.setObject(fileContext, forKeyedSubscript: "__dirname")
+                requireContext.setObject(fileContext, forKeyedSubscript: "__dirname" as NSCopying & NSObjectProtocol)
             }
 
-            requireContext.setObject(unsafeBitCast(NSDictionary(), AnyObject.self), forKeyedSubscript: "exports")
-            requireContext.setObject(unsafeBitCast(NSDictionary(dictionary: ["exports": NSDictionary()]), AnyObject.self), forKeyedSubscript: "module")
+            requireContext.setObject(unsafeBitCast(NSDictionary(), to: AnyObject.self), forKeyedSubscript: "exports" as NSCopying & NSObjectProtocol)
+            requireContext.setObject(unsafeBitCast(NSDictionary(dictionary: ["exports": NSDictionary()]), to: AnyObject.self), forKeyedSubscript: "module" as NSCopying & NSObjectProtocol)
 
             do {
-                let contentsString = try String.init(contentsOfURL: fileURL!)
+                let contentsString = try String.init(contentsOf: fileURL)
                 requireContext.evaluateScript(contentsString)
             } catch {
                 print(error)
@@ -56,14 +61,14 @@ class RequireAwareJSContext : JSContext {
             return requireContext.objectForKeyedSubscript("module").objectForKeyedSubscript("exports")
         }
 
-        self.setObject(unsafeBitCast(require, AnyObject.self), forKeyedSubscript: "require")
+        self.setObject(unsafeBitCast(require, to: AnyObject.self), forKeyedSubscript: "require" as NSCopying & NSObjectProtocol)
     }
 
 
 
     // js loading helpers
-    func URLForJSResource(resource: String) -> NSURL? {
-        let fileURL = findFileNamed(resource)
+    func URLForJSResource(resource: String) -> URL? {
+        let fileURL = findFileNamed(name: resource)
 
         if (fileURL == nil) {
             print("error require(), couldn't find", resource)
@@ -72,16 +77,15 @@ class RequireAwareJSContext : JSContext {
         return fileURL
     }
 
-    func findFileNamed(name: String) -> NSURL? {
-        let fileManager = NSFileManager.defaultManager()
-        var isDirectory: ObjCBool = ObjCBool(false)
+    func findFileNamed(name: String) -> URL? {
+        guard let candidate = Bundle.main.url(forResource: name, withExtension: "js") else {
+            return nil
+        }
 
-        let candidate = NSBundle.mainBundle().URLForResource(
-            name,
-            withExtension: "js"
-        )
+        let fileManager = FileManager.default
+        var isDirectory = ObjCBool(false)
 
-        if candidate != nil && fileManager.fileExistsAtPath(candidate!.path!, isDirectory: &isDirectory) {
+        if fileManager.fileExists(atPath: candidate.path, isDirectory: &isDirectory) {
             if !isDirectory.boolValue {
                 return candidate
             }

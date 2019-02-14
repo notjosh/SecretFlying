@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ParseOperation: NSOperation {
+class ParseOperation: Operation {
     var deals: [ExtremeSuperAmazingDeal] = []
 
     let HTML: String
@@ -19,6 +19,6 @@ class ParseOperation: NSOperation {
 
     override func main() {
         let runner = JavaScriptRunner()
-        deals = runner.run(HTML)
+        deals = runner.run(HTML: HTML)
     }
 }

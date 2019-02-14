@@ -17,7 +17,7 @@ class AspectFillImageView: NSImageView {
             return super.imageScaling
         }
         set {
-            super.imageScaling = .ScaleAxesIndependently
+            super.imageScaling = .scaleAxesIndependently
         }
     }
 
@@ -26,21 +26,21 @@ class AspectFillImageView: NSImageView {
             return super.image
         }
         set {
-            guard newValue != nil else {
-                super.image = newValue
+            guard let newValue = newValue else {
+                super.image = nil
                 return
             }
 
             let aspectFillImage = NSImage.init(
                 size: bounds.size,
-                flipped: flipped) { [weak self] (destinationRect: NSRect) -> Bool in
-                    let imageSize = newValue?.size as NSSize!
+                flipped: isFlipped) { [weak self] (destinationRect: NSRect) -> Bool in
+                    let imageSize = newValue.size as NSSize
                     let containerSize = self!.bounds.size
 
-                    let imageRatio = imageSize!.height / imageSize!.width
+                    let imageRatio = imageSize.height / imageSize.width
                     let containerRatio = containerSize.height / containerSize.width
 
-                    var destinationSize = imageSize!
+                    var destinationSize = imageSize
 
                     if imageRatio < containerRatio {
                         destinationSize.width = imageSize.height / containerRatio
@@ -55,19 +55,19 @@ class AspectFillImageView: NSImageView {
                         height: destinationSize.height
                     )
 
-                    NSGraphicsContext.currentContext()?.imageInterpolation = .High
+                    NSGraphicsContext.current?.imageInterpolation = .high
 
-                    newValue!.drawInRect(
-                        destinationRect,
-                        fromRect: sourceRect,
-                        operation: .CompositeCopy,
-                        fraction: 1.0
+                    newValue.draw(
+                        in: destinationRect,
+                        from: sourceRect,
+                        operation: .copy,
+                        fraction: 1
                     )
 
                     return true
             }
 
-            aspectFillImage.cacheMode = .Never
+            aspectFillImage.cacheMode = .never
 
             super.image = aspectFillImage
         }
@@ -75,12 +75,12 @@ class AspectFillImageView: NSImageView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        super.imageScaling = .ScaleAxesIndependently
+        super.imageScaling = .scaleAxesIndependently
     }
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        super.imageScaling = .ScaleAxesIndependently
+        super.imageScaling = .scaleAxesIndependently
     }
 
 

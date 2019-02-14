@@ -8,23 +8,21 @@
 
 import Foundation
 
-class ExtremeSuperAmazingDeal : CustomStringConvertible {
+struct ExtremeSuperAmazingDeal : CustomStringConvertible {
     let id: String
     let date: String
     let title: String
     let summary: String
-    let thumbnailURL: NSURL
-    let URL: NSURL
+    let thumbnailURL: URL
+    let URL: URL
 
-    var expired: Bool {
-        get {
-            return self.title.containsString("**EXPIRED**")
-        }
+    var isExpired: Bool {
+        return title.contains("**EXPIRED**")
     }
 
     var description: String {
         var description: String = ""
-        description = "***** \(self.dynamicType) - <\(unsafeAddressOf((self as AnyObject)))>***** \n"
+        description = "***** \(type(of: self)) ***** \n"
         let selfMirror = Mirror(reflecting: self)
         for child in selfMirror.children {
             if let propertyName = child.label {
@@ -34,7 +32,7 @@ class ExtremeSuperAmazingDeal : CustomStringConvertible {
         return description
     }
 
-    init(id: String, date: String, title: String, summary: String, thumbnailURL: NSURL, URL: NSURL) {
+    init(id: String, date: String, title: String, summary: String, thumbnailURL: URL, URL: URL) {
         self.id = id
         self.date = date
         self.title = title

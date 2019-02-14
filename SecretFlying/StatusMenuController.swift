@@ -9,36 +9,36 @@
 import Cocoa
 
 class StatusMenuController: NSObject {
-    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let popover = NSPopover()
 
     init(storyboard: NSStoryboard) {
         super.init()
 
         let icon = NSImage(named: "StatusBarIcon")
-        icon?.template = true
+        icon?.isTemplate = true
 
-        let vc = storyboard.instantiateControllerWithIdentifier("WhoaLookAtThoseDeals")
+        let vc = storyboard.instantiateController(withIdentifier: "WhoaLookAtThoseDeals")
         popover.contentViewController = vc as? NSViewController
-        popover.behavior = .Transient
+        popover.behavior = .transient
         popover.animates = false
 
         if let button = statusItem.button {
             button.image = icon
 
             button.target = self
-            button.action = #selector(handleClick(_:))
+            button.action = #selector(handleClick(sender:))
         }
     }
 
     func showPopover(sender: AnyObject?) {
         if let button = statusItem.button {
-            popover.showRelativeToRect(
-                button.bounds,
-                ofView: button,
-                preferredEdge: .MinY
+            popover.show(
+                relativeTo: button.bounds,
+                of: button,
+                preferredEdge: .minY
             )
-            NSApplication.sharedApplication().activateIgnoringOtherApps(true)
+            NSApplication.shared.activate(ignoringOtherApps: true)
         }
     }
 
@@ -46,11 +46,11 @@ class StatusMenuController: NSObject {
         popover.performClose(sender)
     }
 
-    func handleClick(sender: AnyObject?) {
-        if popover.shown {
-            hidePopover(sender)
+    @objc func handleClick(sender: AnyObject?) {
+        if popover.isShown {
+            hidePopover(sender: sender)
         } else {
-            showPopover(sender)
+            showPopover(sender: sender)
         }
     }
 }
